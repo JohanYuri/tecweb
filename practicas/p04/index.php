@@ -34,16 +34,36 @@
         echo '</ul>';
     ?>
     <br>
+
     <h2>Ejercicio 2</h2>
     <p>Proporcionar los valores de $a, $b, $c como sigue:</p>
 
     <?php
-        //Aqui va mi código PHP
-        echo $a = “ManejadorSQL”;
+        // Definiendo las variables
+        $a = "ManejadorSQL";
         $b = 'MySQL';
         $c = &$a;
-    ?php
+        
+        echo '<li>a. Ahora muestra el contenido de cada variable</li>';
+        echo '<h4>Respuestas:</h4>';
+        echo '<ul>';
+            echo '<li>$a = ' . $a . '</li>';
+            echo '<li>$b = ' . $b . '</li>';
+            echo '<li>$c = ' . $c . '</li>';
+        echo '</ul>';
 
-    echo '<h4>Respuestas;</h4>';
+        echo '<li>b. Agrega al código actual las siguientes asignaciones:</li>';
+        echo '$a = "PHP server"<br>';
+        echo '$b = &$a<br><br>';
+        $a = "PHP server";
+        $b = &$a;
+
+        echo '<ul>';
+            echo '<li>$a = ' . $a . '</li>';
+            echo '<li>$b = ' . $b . '</li>';
+        echo '</ul>';
+        
+    ?>
+    
 </body>
 </html>
