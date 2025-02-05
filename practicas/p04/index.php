@@ -165,6 +165,54 @@
             echo '<li>$b = ' . $b . '</li>';
             echo '<li>$c = ' . $c . '</li>';
         echo '</ul>';
+
+        unset($a);
+        unset($b);
+        unset($c);
+
     ?>
+
+    //EJERCICIO 6
+    <h2>Ejercicio 6</h2>
+    <p>Dar y comprobar el valor booleano de las variables $a, $b, $c, $d, $e y $f y muéstralas
+    usando la función var_dump(<datos>).</p>
+    <p>Después investiga una función de PHP que permita transformar el valor booleano de $c y $e
+    en uno que se pueda mostrar con un echo:</p>
+    <ul>
+        <li>$a = “0”;</li>
+        <li>$b = “TRUE”;</li>
+        <li>$c = FALSE;</li>
+        <li>$d = ($a OR $b);</li>
+        <li>$e = ($a AND $c);</li>
+        <li>$f = ($a XOR $b);</li>
+    </ul>
+
+    <?php
+        $a = "0";
+        $b = "TRUE";
+        $c = FALSE;
+        $d = ($a OR $b);
+        $e = ($a AND $c);
+        $f = ($a XOR $b);
+        
+        echo 'Se muestranusando la función var_dump(<datos>):<br>';
+        echo '<br>- $a: ';
+        var_dump(value: $a);
+        echo '<br>- $b: ';
+        var_dump(value: $b);
+        echo '<br>- $c: ';
+        var_dump(value: $c);
+        echo '<br>- $d: ';
+        var_dump(value: $d);
+        echo '<br>- $e: ';
+        var_dump(value: $e);
+        echo '<br>- $f: ';
+        var_dump(value: $f);
+        
+        echo '<br><br> Mediante la función var_export() se pudo convertir un valor booleano para que echo lo pueda mostrar';
+        echo "<br>Valor de \$c: " . var_export($c, true) . "\n";
+        echo "<br>Valor de \$e: " . var_export($e, true) . "\n";
+    ?>
+
 </body>
 </html>
