@@ -62,8 +62,68 @@
             echo '<li>$a = ' . $a . '</li>';
             echo '<li>$b = ' . $b . '</li>';
         echo '</ul>';
-        
+        echo '<h4>¿Qué pasó en el segundo bloque de asignaciones?</h4>';
+        echo 'Respuesta: Se asigno otro valor a la variable $a y a la variable $b se asigno como un apuntador a la varibale $a por lo que las dos tendran el mismo valor';
     ?>
     
+    <h2>Ejercicio 3</h2>
+    <p>Muestra el contenido de cada variable inmediatamente después de cada asignación,
+    verificar la evolución del tipo de estas variables (imprime todos los componentes de los
+    arreglo):</p>
+
+    <?php
+    //1
+    echo '1- Se asigna $a = "PHP5"';
+    $a="PHP5";
+    echo '<br>';
+    echo $a; 
+    echo '<br><br>';
+    
+    //2
+    echo '2- Se asigna $z[] = &$a';
+    $z[]=&$a;
+    echo '<br>';
+    var_dump($z);
+    echo '<br><br>';
+
+    //3
+    echo '3- Se asigna $b = “5a version de PHP”;';
+    $b = "5a version de PHP";
+    echo '<br>';
+    echo $b;
+    echo '<br><br>';
+
+    //4
+    echo '4- Se asigna $c = $b*10;';
+    @$c = $b*10;
+    echo '<br>';
+    echo $c;
+    echo '<br><br>';
+
+    //5
+    echo '5- Se asigna $a .= $b;';
+    $a .= $b;
+    echo '<br>';
+    echo $a;
+    echo '<br><br>';
+
+    //6
+    echo '6- Se asigna $b *= $c;';
+    $b *= $c;
+    echo '<br>';
+    echo $b;
+    echo '<br><br>';
+
+    //7
+    echo '7- Se asigna $z[0] = “MySQL”;';
+    $z[0] = "MySQL";
+    echo '<br>';
+    var_dump($z);
+    echo '<br><br>';
+    ?>
+
+
+
+
 </body>
 </html>
