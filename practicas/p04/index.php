@@ -8,7 +8,6 @@
 
 <body>
 
-    //EJERCICIO 1
     <h2>Ejercicio 1</h2>
     <p>Determina cuál de las siguientes variables son válidas y explica por qué:</p>
     <p>$_myvar,  $_7var,  myvar,  $myvar,  $var7,  $_element1, $house*5</p>
@@ -37,7 +36,7 @@
     ?>
     <br>
 
-    //EJERCICIO 2
+    <hr>
     <h2>Ejercicio 2</h2>
     <p>Proporcionar los valores de $a, $b, $c como sigue:</p>
 
@@ -69,7 +68,7 @@
         echo 'Respuesta: Se asigno otro valor a la variable $a y a la variable $b se asigno como un apuntador a la varibale $a por lo que las dos tendran el mismo valor';
     ?>
     
-    //EJERCICIO 3
+    <hr>
     <h2>Ejercicio 3</h2>
     <p>Muestra el contenido de cada variable inmediatamente después de cada asignación,
     verificar la evolución del tipo de estas variables (imprime todos los componentes de los
@@ -125,8 +124,8 @@
     var_dump($z);
     echo '<br><br>';
     ?>
-
-    //EJERCICIO 4
+    
+    <hr>
     <h2>Ejercicio 4</h2>
     <p>Lee y muestra los valores de las variables del ejercicio anterior, pero ahora con la ayuda de
     la matriz $GLOBALS o del modificador global de PHP.</p>
@@ -144,7 +143,6 @@
     unset($z);
     ?>
 
-    //EJERCICIO 5
     <h2>Ejercicio 5</h2>
     <p>Dar el valor de las variables $a, $b, $c al final del siguiente script:</p>
 
@@ -172,7 +170,7 @@
 
     ?>
 
-    //EJERCICIO 6
+    <hr>
     <h2>Ejercicio 6</h2>
     <p>Dar y comprobar el valor booleano de las variables $a, $b, $c, $d, $e y $f y muéstralas
     usando la función var_dump(<datos>).</p>
@@ -212,6 +210,22 @@
         echo '<br><br> Mediante la función var_export() se pudo convertir un valor booleano para que echo lo pueda mostrar';
         echo "<br>Valor de \$c: " . var_export($c, true) . "\n";
         echo "<br>Valor de \$e: " . var_export($e, true) . "\n";
+    ?>
+
+    <hr>
+    <h2>Ejercicio 7</h2>
+    <p>Usando la variable predefinida $_SERVER, determina lo siguiente:</p>
+    <ul>
+        <li>a. La versión de Apache y PHP</li>
+        <li>b. El nombre del sistema operativo (servidor)</li>
+        <li>c. El idioma del navegador (cliente)</li>
+    </ul>
+
+    <?php
+        echo '<h4>Respuestas:</h4>';
+        echo 'a. Versión de Apache y PHP: ',  $_SERVER['SERVER_SOFTWARE'];
+        echo '<br>b. Nombre del sistema operativo: ', $_SERVER['SERVER_SOFTWARE'];
+        echo '<br>c. Idioma del navegador: </b>', $_SERVER['HTTP_ACCEPT_LANGUAGE'], '<br>';
     ?>
 
 </body>
