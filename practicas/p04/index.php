@@ -7,6 +7,8 @@
 </head>
 
 <body>
+
+    //EJERCICIO 1
     <h2>Ejercicio 1</h2>
     <p>Determina cuál de las siguientes variables son válidas y explica por qué:</p>
     <p>$_myvar,  $_7var,  myvar,  $myvar,  $var7,  $_element1, $house*5</p>
@@ -35,6 +37,7 @@
     ?>
     <br>
 
+    //EJERCICIO 2
     <h2>Ejercicio 2</h2>
     <p>Proporcionar los valores de $a, $b, $c como sigue:</p>
 
@@ -66,6 +69,7 @@
         echo 'Respuesta: Se asigno otro valor a la variable $a y a la variable $b se asigno como un apuntador a la varibale $a por lo que las dos tendran el mismo valor';
     ?>
     
+    //EJERCICIO 3
     <h2>Ejercicio 3</h2>
     <p>Muestra el contenido de cada variable inmediatamente después de cada asignación,
     verificar la evolución del tipo de estas variables (imprime todos los componentes de los
@@ -122,7 +126,23 @@
     echo '<br><br>';
     ?>
 
+    //EJERCICIO 4
+    <h2>Ejercicio 4</h2>
+    <p>Lee y muestra los valores de las variables del ejercicio anterior, pero ahora con la ayuda de
+    la matriz $GLOBALS o del modificador global de PHP.</p>
 
+    <?php
+    echo 'Usando $GLOBALS: <br><br>';
+    echo '$a: ', $GLOBALS['a'], '<br>';
+    echo '$b: ', $GLOBALS['b'], '<br>';
+    echo '$c: ', $GLOBALS['c'], '<br>';
+    echo '$z[]: ', var_dump($GLOBALS['z']), '<br><hr>';
+    
+    unset($a);
+    unset($b);
+    unset($c);
+    unset($z);
+    ?>
 
 
 </body>
