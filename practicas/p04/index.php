@@ -50,7 +50,7 @@
         echo '<h4>Respuestas:</h4>';
         echo '<ul>';
             echo '<li>$a = ' . $a . '</li>';
-            echo '<li>$b = ' . $b . '</li>';
+                echo '<li>$b = ' . $b . '</li>';
             echo '<li>$c = ' . $c . '</li>';
         echo '</ul>';
 
