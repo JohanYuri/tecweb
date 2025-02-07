@@ -4,42 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Práctica 4</title>
-    <?php
-        require_once 'src/funciones.php'; //Se incluye el archivo funciones.php
-    ?>
+
 </head>
 <body>
-    <h2>Ejercicio 1</h2>
-    <p>Escribir un programa para comprobar si un número es múltiplo de 5 y 7</p>
-
-    <form method="get">
-        <input type="number" name="numero" required>
-        <input type="submit" value="Comprobar">
-    </form>
-
     <?php
-        if(isset($_GET['numero'])) {
-            $num = $_GET['numero'];
-            if ($num % 5 == 0 && $num % 7 == 0) {
-                echo '<h3>R= El número '.$num.' SÍ es múltiplo de 5 y 7.</h3>';
-            } else {
-                echo '<h3>R= El número '.$num.' NO es múltiplo de 5 y 7.</h3>';
-            }
-        }
-    ?>
+        require_once 'src/funciones.php'; //Se incluye el archivo funciones.php
 
-    <h2>Ejemplo de POST</h2>
-    <form action="index.php" method="post"> <!-- ✅ Ya no tiene la URL absoluta -->
-        Nombre: <input type="text" name="name" required><br>
-        E-mail: <input type="email" name="email" required><br>
-        <input type="submit" value="Enviar">
-    </form>
-    <br>
-    <?php
-        if(isset($_POST["name"]) && isset($_POST["email"])) {
-            echo '<h3>Nombre: ' . htmlspecialchars($_POST["name"]) . '</h3>';
-            echo '<h3>Email: ' . htmlspecialchars($_POST["email"]) . '</h3>';
-        }
-    ?>
+        //Ejercicio 1
+        echo'<h2>Ejercicio 1</h2>';
+        echo'<p>Escribir un programa para comprobar si un número es múltiplo de 5 y 7</p>';
+        multiplo(5,7); //Se llama a la función y se dan los números que queremos saber si son multiplos de un tercer
+        echo '<hr><br>';
+        
+        //Ejercicio 2
+        echo'<h2>Ejercicio 2</h2>';
+        echo'<p>Crea un programa para la generación repetitiva de 3 números aleatorios hasta obtener una
+        secuencia compuesta por:</p>';
+        echo '<p>Por ejemplo:</p>';
+        echo '<img src="src/img/EJ2_Ejemplo.png"';
+        echo '<br><br>';
+        numaleatorios();
+        echo '<hr><br>';
+
+        //Ejercicio 3
+        echo '<h2>Ejercicio 3</h2>';
+        echo'<p>Crea un programa para la generación repetitiva de 3 números aleatorios hasta obtener una
+        secuencia compuesta por:</p>';
+
+        
+    
+    ?>    
 </body>
 </html>
