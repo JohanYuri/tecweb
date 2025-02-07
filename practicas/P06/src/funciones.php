@@ -64,4 +64,23 @@
             echo 'para comenzar, teclea "?numero=X en la barra de direcciones!"';
         }
     }    
+
+    //Ejercicio 4
+    function generarArregloAlfabeto() {
+        $arreglo = [];
+        for ($i = 97; $i <= 122; $i++) {
+            $arreglo[$i] = chr($i);
+        }
+        return $arreglo;
+    }
+    
+    function mostrarTablaAlfabeto($arreglo) {
+        echo '<table border="1">';
+        echo '<tr><th>Índice</th><th>Letra</th></tr>';
+        foreach ($arreglo as $key => $value) {
+            echo "<tr><td>$key</td><td>$value</td></tr>";
+        }
+        echo '</table>';
+    }
+    
 ?>
