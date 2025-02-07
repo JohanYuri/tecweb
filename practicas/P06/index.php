@@ -60,8 +60,21 @@
         bienvenida apropiado. Por ejemplo: <br>Bienvenida, usted está en el rango de edad permitido.
         <br>En caso contrario, deberá devolverse otro mensaje indicando el error.</p>';  
         
-        echo'<a href="EJ5.html">
-                <button>Formulario EJ5</button>
+        echo'<a href="Ej5.html">
+                <button style="background-color:rgb(175, 76, 76); color: white; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; border: none; border-radius: 12px; cursor: pointer;">
+                    Formulario EJ5
+                </button>
+            </a>';
+        echo '<hr><br>';
+        
+        //Ejercicio 6
+        echo '<h2>Ejercicio 6</h2>';
+        echo'<p>Crea en código duro un arreglo asociativo que sirva para registrar el parque vehicular de
+        una ciudad.</p>';
+        echo'<a href="Ej6.html">
+                <button style="background-color: rgb(175, 76, 76); color: white; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; border: none; border-radius: 12px; cursor: pointer;">
+                    Formulario EJ6
+                </button>
             </a>';
     ?>    
 </body>

@@ -18,8 +18,5 @@
         } 
     ?>
     <br>
-    <a href="../EJ5.html">
-        <button>Regresar</button>
-    </a>
 </body>
 </html>

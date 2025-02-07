@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 6</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        form {
+            width: 300px;
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            margin: 5px 0;
+        }
+
+        input[type="text"], input[type="checkbox"], input[type="submit"] {
+            padding: 5px;
+            margin: 5px 0;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="checkbox"] {
+            width: auto;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <br><br>
+    
+    <form action="src/EJ6.php" method="POST">
+        <label for="matricula">Matrícula:</label>
+        <input type="text" name="matricula" placeholder="LLLNNNN">
+        <br><br>
+        
+        <label for="ver_vehiculos">Ver todos los autos:</label>
+        <input type="checkbox" name="ver_vehiculos" value="1">
+        <br><br>
+
+        <input type="submit" value="Enviar">
+    </form>
+</body>
+</html>
