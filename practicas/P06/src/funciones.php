@@ -66,21 +66,24 @@
     }    
 
     //Ejercicio 4
-    function generarArregloAlfabeto() {
+    function generarArregloAlfabeto() 
+    {
         $arreglo = [];
-        for ($i = 97; $i <= 122; $i++) {
+
+        for ($i = 97; $i <= 122; $i++) 
+        {
             $arreglo[$i] = chr($i);
         }
-        return $arreglo;
-    }
-    
-    function mostrarTablaAlfabeto($arreglo) {
-        echo '<table border="1">';
-        echo '<tr><th>Índice</th><th>Letra</th></tr>';
-        foreach ($arreglo as $key => $value) {
-            echo "<tr><td>$key</td><td>$value</td></tr>";
+
+        echo '<table border = 1>';
+        echo '<tr><th>Índice</th><th>Valor</th></tr>';
+
+        foreach ($arreglo as $index => $value) {
+            echo "<tr><td>$index</td><td>$value</td></tr>";
         }
         echo '</table>';
     }
+    
+    
     
 ?>

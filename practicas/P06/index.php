@@ -49,8 +49,7 @@
             echo '<li>Lee el arreglo y crea una tabla en XHTML con echo y un ciclo foreach</li>';
         echo '</ul>';
         echo '<img src="src/img/EJ4_Ejemplo_2.png"';
-        $arregloAlfabeto = generarArregloAlfabeto();
-        mostrarTablaAlfabeto($arregloAlfabeto);
+        generarArregloAlfabeto();
         echo '<hr><br>';
 
         //Ejercicio 5
