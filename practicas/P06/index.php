@@ -28,8 +28,15 @@
 
         //Ejercicio 3
         echo '<h2>Ejercicio 3</h2>';
-        echo'<p>Crea un programa para la generación repetitiva de 3 números aleatorios hasta obtener una
-        secuencia compuesta por:</p>';
+        echo'<p>Utiliza un ciclo while para encontrar el primer número entero obtenido aleatoriamente,
+        pero que además sea múltiplo de un número dado.</p>';
+        echo '<ul>';
+            echo '<li>Crear una variante de este script utilizando el ciclo do-while.</li>';
+            echo '<li>El número dado se debe obtener vía GET.</li>';
+        echo '</ul>';
+        echo '<br>';
+        primeroInt();
+        echo '<hr><br>';
 
         
     

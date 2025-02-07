@@ -42,4 +42,26 @@
         
         echo '<br><br>' . $generados . ' numeros generados en ' . $inte . ' iteraciones.<br>';
     }
+
+    //Ejercicio 3
+    function primeroInt()
+    {
+        if(isset($_GET['numero']))
+        {
+            $num = $_GET['numero'];
+            $num_aleatorio = NULL;
+
+            do{
+                $num_aleatorio = rand(0,1000);
+                echo "$num_aleatorio <br>";
+            }
+            while (($num_aleatorio % $num) != 0);
+
+            echo $num_aleatorio . ' es multiplo de ' . $num;
+        }
+        else
+        {
+            echo 'para comenzar, teclea "?numero=X en la barra de direcciones!"';
+        }
+    }    
 ?>
