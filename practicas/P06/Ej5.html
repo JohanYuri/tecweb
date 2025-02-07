@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 5</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        form {
+            width: 300px;
+            margin: 0 auto;
+        }
+
+        input, select {
+            padding: 5px;
+            margin: 5px 0;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <a href="index.php">
+        <button>Regresar</button>
+    </a>
+    <br><br>
+    
+    <form action="src/EJ5.php" method="POST">
+        Sexo:
+        <select name="sexo" title="sexo">
+            <option value="">Selecciona</option>
+            <option value="Masculino">Masculino</option>
+            <option value="Femenino">Femenino</option>
+            <option value="Otro">Otro</option>
+        </select>
+        <br><br>
+
+        Edad: <input placeholder="edad" type="number" name="edad" min="0" max="120"><br><br>
+        
+        <input type="submit" value="Enviar">
+    </form>
+</body>
+</html>

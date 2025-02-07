@@ -60,7 +60,7 @@
         bienvenida apropiado. Por ejemplo: <br>Bienvenida, usted está en el rango de edad permitido.
         <br>En caso contrario, deberá devolverse otro mensaje indicando el error.</p>';  
         
-        echo'<a href="EJ5.php">
+        echo'<a href="EJ5.html">
                 <button>Formulario EJ5</button>
             </a>';
     ?>    
