@@ -34,9 +34,9 @@
         echo '<li>$house*5 es inválida porque el símbolo * no está permitido.</li>';
         echo '</ul>';
     ?>
-    <br>
+    <p><br /></p>
 
-    <hr>
+    <hr />
     <h2>Ejercicio 2</h2>
     <p>Proporcionar los valores de $a, $b, $c como sigue:</p>
 
@@ -55,8 +55,8 @@
         echo '</ul>';
 
         echo '<li>b. Agrega al código actual las siguientes asignaciones:</li>';
-        echo '$a = "PHP server"<br>';
-        echo '$b = &$a<br><br>';
+        echo '$a = "PHP server"<br />';
+        echo '$b = &$a<br /><br />';
         $a = "PHP server";
         $b = &$a;
 
@@ -68,7 +68,7 @@
         echo 'Respuesta: Se asigno otro valor a la variable $a y a la variable $b se asigno como un apuntador a la varibale $a por lo que las dos tendran el mismo valor';
     ?>
     
-    <hr>
+    <hr />
     <h2>Ejercicio 3</h2>
     <p>Muestra el contenido de cada variable inmediatamente después de cada asignación,
     verificar la evolución del tipo de estas variables (imprime todos los componentes de los
@@ -78,64 +78,64 @@
     //1
     echo '1- Se asigna $a = "PHP5"';
     $a="PHP5";
-    echo '<br>';
+    echo '<p><br /></p>';
     echo $a; 
-    echo '<br><br>';
+    echo '<p><br /></p>';
     
     //2
     echo '2- Se asigna $z[] = &$a';
     $z[]=&$a;
-    echo '<br>';
+    echo '<p><br /></p>';
     var_dump($z);
-    echo '<br><br>';
+    echo '<p><br /></p>';
 
     //3
     echo '3- Se asigna $b = “5a version de PHP”;';
     $b = "5a version de PHP";
-    echo '<br>';
+    echo '<p><br /></p>';
     echo $b;
-    echo '<br><br>';
+    echo '<p><br /></p>';
 
     //4
     echo '4- Se asigna $c = $b*10;';
     @$c = $b*10;
-    echo '<br>';
+    echo '<p><br /></p>';
     echo $c;
-    echo '<br><br>';
+    echo '<p><br /></p>';
 
     //5
     echo '5- Se asigna $a .= $b;';
     $a .= $b;
-    echo '<br>';
+    echo '<p><br /></p>';
     echo $a;
-    echo '<br><br>';
+    echo '<p><br /></p>';
 
     //6
     echo '6- Se asigna $b *= $c;';
     $b *= $c;
-    echo '<br>';
+    echo '<p><br /></p>';
     echo $b;
-    echo '<br><br>';
+    echo '<p><br /></p>';
 
     //7
     echo '7- Se asigna $z[0] = “MySQL”;';
     $z[0] = "MySQL";
-    echo '<br>';
+    echo '<p><br /></p>';
     var_dump($z);
-    echo '<br><br>';
+    echo '<p><br /></p>';
     ?>
     
-    <hr>
+    <hr />
     <h2>Ejercicio 4</h2>
     <p>Lee y muestra los valores de las variables del ejercicio anterior, pero ahora con la ayuda de
     la matriz $GLOBALS o del modificador global de PHP.</p>
 
     <?php
-    echo 'Usando $GLOBALS: <br><br>';
-    echo '$a: ', $GLOBALS['a'], '<br>';
-    echo '$b: ', $GLOBALS['b'], '<br>';
-    echo '$c: ', $GLOBALS['c'], '<br>';
-    echo '$z[]: ', var_dump($GLOBALS['z']), '<br><hr>';
+    echo 'Usando $GLOBALS: <p><br /></p>';
+    echo '$a: ', $GLOBALS['a'], '<p><br /></p>';
+    echo '$b: ', $GLOBALS['b'], '<p><br /></p>';
+    echo '$c: ', $GLOBALS['c'], '<p><br /></p>';
+    echo '$z[]: ', var_dump($GLOBALS['z']), '<p><hr /></p>';
     
     unset($a);
     unset($b);
@@ -147,10 +147,10 @@
     <p>Dar el valor de las variables $a, $b, $c al final del siguiente script:</p>
 
     <?php
-        echo '$a = “7 personas”;<br>
-        $b = (integer) $a;<br>
-        $a = “9E3”;<br>
-        $c = (double) $a;<br><br>';
+        echo '$a = “7 personas”;<br />
+        $b = (integer) $a;<br />
+        $a = “9E3”;<br />
+        $c = (double) $a;<p><br /></p>';
 
         $a = "7 personas";
         $b = (integer) $a;
@@ -170,10 +170,10 @@
 
     ?>
 
-    <hr>
+    <hr />
     <h2>Ejercicio 6</h2>
     <p>Dar y comprobar el valor booleano de las variables $a, $b, $c, $d, $e y $f y muéstralas
-    usando la función var_dump(<datos>).</p>
+    usando la función var_dump().</p>
     <p>Después investiga una función de PHP que permita transformar el valor booleano de $c y $e
     en uno que se pueda mostrar con un echo:</p>
     <ul>
@@ -193,26 +193,27 @@
         $e = ($a AND $c);
         $f = ($a XOR $b);
         
-        echo 'Se muestranusando la función var_dump(<datos>):<br>';
-        echo '<br>- $a: ';
-        var_dump(value: $a);
-        echo '<br>- $b: ';
-        var_dump(value: $b);
-        echo '<br>- $c: ';
-        var_dump(value: $c);
-        echo '<br>- $d: ';
-        var_dump(value: $d);
-        echo '<br>- $e: ';
-        var_dump(value: $e);
-        echo '<br>- $f: ';
-        var_dump(value: $f);
+        echo 'Se muestran usando la función var_dump():<p><br /></p>';
+        echo '<p>- $a: ';
+        var_dump($a);
+        echo '</p><p>- $b: ';
+        var_dump($b);
+        echo '</p><p>- $c: ';
+        var_dump($c);
+        echo '</p><p>- $d: ';
+        var_dump($d);
+        echo '</p><p>- $e: ';
+        var_dump($e);
+        echo '</p><p>- $f: ';
+        var_dump($f);
+        echo '</p>';
         
-        echo '<br><br> Mediante la función var_export() se pudo convertir un valor booleano para que echo lo pueda mostrar';
-        echo "<br>Valor de \$c: " . var_export($c, true) . "\n";
-        echo "<br>Valor de \$e: " . var_export($e, true) . "\n";
+        echo '<p>Mediante la función var_export() se pudo convertir un valor booleano para que echo lo pueda mostrar</p>';
+        echo "<p>Valor de \$c: " . var_export($c, true) . "</p>";
+        echo "<p>Valor de \$e: " . var_export($e, true) . "</p>";
     ?>
 
-    <hr>
+    <hr />
     <h2>Ejercicio 7</h2>
     <p>Usando la variable predefinida $_SERVER, determina lo siguiente:</p>
     <ul>
@@ -224,8 +225,8 @@
     <?php
         echo '<h4>Respuestas:</h4>';
         echo 'a. Versión de Apache y PHP: ',  $_SERVER['SERVER_SOFTWARE'];
-        echo '<br>b. Nombre del sistema operativo: ', $_SERVER['SERVER_SOFTWARE'];
-        echo '<br>c. Idioma del navegador: </b>', $_SERVER['HTTP_ACCEPT_LANGUAGE'], '<br>';
+        echo '<p>b. Nombre del sistema operativo: ', $_SERVER['SERVER_SOFTWARE'], '</p>';
+        echo '<p>c. Idioma del navegador: ', $_SERVER['HTTP_ACCEPT_LANGUAGE'], '</p>';
     ?>
 
 </body>
