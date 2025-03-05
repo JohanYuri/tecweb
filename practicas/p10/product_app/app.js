@@ -6,9 +6,9 @@ var baseJSON = {
     "marca": "NA",
     "detalles": "NA",
     "imagen": "img/default.png"
-  };
+};
 
-// FUNCIÓN CALLBACK DE BOTÓN "Buscar"
+// FUNCIÓN CALLBACK DE BOTÓN "Buscar por ID"
 function buscarID(e) {
     /**
      * Revisar la siguiente información para entender porqué usar event.preventDefault();
@@ -18,7 +18,7 @@ function buscarID(e) {
     e.preventDefault();
 
     // SE OBTIENE EL ID A BUSCAR
-    var id = document.getElementById('search').value;
+    var id = document.getElementById('id').value;
 
     // SE CREA EL OBJETO DE CONEXIÓN ASÍNCRONA AL SERVIDOR
     var client = getXMLHttpRequest();
@@ -58,6 +58,57 @@ function buscarID(e) {
         }
     };
     client.send("id="+id);
+}
+
+// FUNCIÓN CALLBACK DE BOTÓN "Buscar Productos"
+function buscarProductos(e) {
+    e.preventDefault();
+
+    // SE OBTIENEN LOS CRITERIOS DE BÚSQUEDA
+    var nombre = document.getElementById('nombre').value;
+    var marca = document.getElementById('marca').value;
+    var detalles = document.getElementById('detalles').value;
+    var search = nombre || marca || detalles;
+
+    // SE CREA EL OBJETO DE CONEXIÓN ASÍNCRONA AL SERVIDOR
+    var client = getXMLHttpRequest();
+    client.open('POST', './backend/read.php', true);
+    client.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    client.onreadystatechange = function () {
+        // SE VERIFICA SI LA RESPUESTA ESTÁ LISTA Y FUE SATISFACTORIA
+        if (client.readyState == 4 && client.status == 200) {
+            console.log('[CLIENTE]\n'+client.responseText);
+            
+            // SE OBTIENE EL OBJETO DE DATOS A PARTIR DE UN STRING JSON
+            let productos = JSON.parse(client.responseText);    // similar a eval('('+client.responseText+')');
+            
+            // SE VERIFICA SI EL OBJETO JSON TIENE DATOS
+            if(productos.length > 0) {
+                // SE CREA UNA PLANTILLA PARA CREAR LA(S) FILA(S) A INSERTAR EN EL DOCUMENTO HTML
+                let template = '';
+                productos.forEach(producto => {
+                    let descripcion = '';
+                    descripcion += '<li>precio: '+producto.precio+'</li>';
+                    descripcion += '<li>unidades: '+producto.unidades+'</li>';
+                    descripcion += '<li>modelo: '+producto.modelo+'</li>';
+                    descripcion += '<li>marca: '+producto.marca+'</li>';
+                    descripcion += '<li>detalles: '+producto.detalles+'</li>';
+
+                    template += `
+                        <tr>
+                            <td>${producto.id}</td>
+                            <td>${producto.nombre}</td>
+                            <td><ul>${descripcion}</ul></td>
+                        </tr>
+                    `;
+                });
+
+                // SE INSERTA LA PLANTILLA EN EL ELEMENTO CON ID "productos"
+                document.getElementById("productos").innerHTML = template;
+            }
+        }
+    };
+    client.send(`nombre=${encodeURIComponent(nombre)}&marca=${encodeURIComponent(marca)}&detalles=${encodeURIComponent(detalles)}`);
 }
 
 // FUNCIÓN CALLBACK DE BOTÓN "Agregar Producto"
