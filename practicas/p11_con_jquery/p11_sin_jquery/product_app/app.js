@@ -182,7 +182,7 @@ $(document).ready(function(){
             errorMessage += "El nombre del producto no puede estar vacío o ser mayor a 100 caracteres\n";
         }
 
-        if (!["Logitech", "Nvidia", "HyperX", "NZXT"].includes(finalJSON['marca'])) {
+        if (!["Jordan", "Adidas", "Nike", "Puma"].includes(finalJSON['marca'])) {
             valid = false;
             errorMessage += "La marca del producto no es válida\n";
         }
