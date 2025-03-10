@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Formulario Productos</title>
+    <style>
+        ol, ul { 
+            list-style-type: none;
+        }
+    </style>
+    <script>
+        function validarFormulario(event) {
+            event.preventDefault();
+
+            let nombre = document.getElementById("form-name").value.trim();
+            let marca = document.getElementById("form-marca").value;
+            let modelo = document.getElementById("form-modelo").value.trim();
+            let precio = parseFloat(document.getElementById("form-precio").value);
+            let detalles = document.getElementById("form-detalles").value;
+            let unidades = parseInt(document.getElementById("form-unidades").value);
+            let imagen = document.getElementById("form-imagen").value;
+
+            if (nombre === "" || nombre.length > 100) {
+                alert("El nombre es requerido y debe tener 100 caracteres o menos.");
+                return;
+            }
+            
+            if (marca === "") {
+                alert("Debe seleccionar una marca.");
+                return;
+            }
+            
+            if (modelo === "" || modelo.length > 25 || !/^[a-zA-Z0-9]+$/.test(modelo)) {
+                alert("El modelo es requerido, debe ser alfanumérico y tener 25 caracteres o menos.");
+                return;
+            }
+            
+            if (isNaN(precio) || precio <= 99.99) {
+                alert("El precio debe ser mayor a 99.99.");
+                return;
+            }
+            
+            if (detalles.length > 250) {
+                alert("Los detalles deben tener 250 caracteres o menos.");
+                return;
+            }
+            
+            if (isNaN(unidades) || unidades < 0) {
+                alert("Las unidades deben ser 0 o más.");
+                return;
+            }
+            
+            if (imagen === "") {
+                document.getElementById("form-imagen").value = "imagenes/default.png";
+            }
+
+            document.getElementById("formulario-productos").submit();
+        }
+    </script>
+</head>
+<body>
+    <h1>Tienda de Baloncesto</h1>
+    <form id="formulario-productos" action="http://localhost/tecweb/practicas/p08/Parte 2/set_producto_v2.php" method="post" onsubmit="validarFormulario(event)">
+        <fieldset>
+            <legend>Información del Producto</legend>
+            <ul>
+                <li><label for="form-name">Nombre:</label> 
+                    <input type="text" name="nombre" id="form-name" maxlength="100" required>
+                </li>
+                
+                <li><label for="form-marca">Marca:</label> 
+                    <select name="marca" id="form-marca" required>
+                        <option value="">Seleccione una marca</option>
+                        <option value="Marca1">Jordan</option>
+                        <option value="Marca2">Nike</option>
+                        <option value="Marca3">Adidas</option>
+                    </select>
+                </li>
+                
+                <li><label for="form-modelo">Modelo:</label> 
+                    <input type="text" name="modelo" id="form-modelo" maxlength="25" required>
+                </li>
+                
+                <li><label for="form-precio">Precio:</label> 
+                    <input type="number" name="precio" id="form-precio" step="0.01" min="99.99" required>
+                </li>
+                
+                <li><label for="form-detalles">Detalles:</label><br>
+                    <textarea name="detalles" rows="4" cols="60" id="form-detalles" maxlength="250" placeholder="No más de 250 caracteres de longitud"></textarea>
+                </li>
+                
+                <li><label for="form-unidades">Unidades:</label> 
+                    <input type="number" name="unidades" id="form-unidades" min="0" required>
+                </li>
+                
+                <li><label for="form-imagen">Imagen:</label> 
+                    <input type="file" name="imagen" id="form-imagen" accept="image/*">
+                </li>
+            </ul>
+        </fieldset>
+
+        <p>
+            <input type="submit" value="Enviar">
+            <input type="reset">
+        </p>
+    </form>
+</body>
+</html>

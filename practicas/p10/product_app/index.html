@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product App</title>
+    <style>
+        /* Estilos mínimos para el formulario */
+        #task-form div {
+            margin-bottom: 10px; /* Espacio entre los elementos del formulario */
+        }
+
+        #task-form input[type="text"],
+        #task-form textarea {
+            width: 100%; /* Los campos ocupan todo el ancho disponible */
+            padding: 8px;
+            box-sizing: border-box; /* El padding se incluye en el ancho */
+        }
+    </style>
+</head>
+<body onload="init()">
+
+    <nav>
+        <a href="#">Product App</a>
+        <ul></ul>
+        <form>
+            <input name="id" id="id" type="search" placeholder="ID">
+            <input name="nombre" id="nombre" type="search" placeholder="Nombre">
+            <input name="marca" id="marca" type="search" placeholder="Marca">
+            <input name="detalles" id="detalles" type="search" placeholder="Detalles">
+            <button type="submit" onclick="buscarID(event)">Buscar por ID</button>
+            <button type="button" onclick="buscarProductos(event)">Buscar Productos</button>
+        </form>
+    </nav>
+
+    <div>
+        <div>
+            <form id="task-form">
+                <div>
+                    <label for="name">Nombre del Producto:</label>
+                    <input type="text" id="name" placeholder="Nombre de producto">
+                </div>
+                <div>
+                    <label for="description">JSON del Producto:</label>
+                    <textarea id="description" placeholder="JSON de producto"></textarea>
+                </div>
+                <input type="hidden" id="taskId">
+                <button type="submit" onclick="agregarProducto(event)">
+                    Agregar Producto
+                </button>
+            </form>
+        </div>
+
+        <div>
+            <ul></ul>
+            <table>
+                <thead>
+                    <tr>
+                        <td>Id</td>
+                        <td>Nombre</td>
+                        <td>Descripcion</td>
+                    </tr>
+                </thead>
+                <tbody id="productos"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="./app.js"></script>
+</body>
+</html>
