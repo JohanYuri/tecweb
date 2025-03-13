@@ -6,12 +6,12 @@ var baseJSON = {
     "marca": "NA",
     "detalles": "NA",
     "imagen": "img/default.png"
-};
+  };
 
 $(document).ready(function(){
     let edit = false;
 
-    let JsonString = JSON.stringify(baseJSON, null, 2);
+    let JsonString = JSON.stringify(baseJSON,null,2);
     $('#description').val(JsonString);
     $('#product-result').hide();
     listarProductos();
@@ -22,16 +22,15 @@ $(document).ready(function(){
             type: 'GET',
             success: function(response) {
                 const productos = JSON.parse(response);
-                if (Object.keys(productos).length > 0) {
+                if(Object.keys(productos).length > 0) {
                     let template = '';
                     productos.forEach(producto => {
                         let descripcion = '';
-                        descripcion += '<li>precio: ' + producto.precio + '</li>';
-                        descripcion += '<li>unidades: ' + producto.unidades + '</li>';
-                        descripcion += '<li>modelo: ' + producto.modelo + '</li>';
-                        descripcion += '<li>marca: ' + producto.marca + '</li>';
-                        descripcion += '<li>detalles: ' + producto.detalles + '</li>';
-
+                        descripcion += '<li>precio: '+producto.precio+'</li>';
+                        descripcion += '<li>unidades: '+producto.unidades+'</li>';
+                        descripcion += '<li>modelo: '+producto.modelo+'</li>';
+                        descripcion += '<li>marca: '+producto.marca+'</li>';
+                        descripcion += '<li>detalles: '+producto.detalles+'</li>';
                         template += `
                             <tr productId="${producto.id}">
                                 <td>${producto.id}</td>
@@ -51,61 +50,11 @@ $(document).ready(function(){
         });
     }
 
-    $('#search').keyup(function() {
-        if ($('#search').val()) {
-            let search = $('#search').val();
-            $.ajax({
-                url: './backend/product-search.php?search=' + search,
-                data: { search },
-                type: 'GET',
-                success: function(response) {
-                    if (!response.error) {
-                        const productos = JSON.parse(response);
-                        if (Object.keys(productos).length > 0) {
-                            let template = '';
-                            let template_bar = '';
-                            productos.forEach(producto => {
-                                let descripcion = '';
-                                descripcion += '<li>precio: ' + producto.precio + '</li>';
-                                descripcion += '<li>unidades: ' + producto.unidades + '</li>';
-                                descripcion += '<li>modelo: ' + producto.modelo + '</li>';
-                                descripcion += '<li>marca: ' + producto.marca + '</li>';
-                                descripcion += '<li>detalles: ' + producto.detalles + '</li>';
-
-                                template += `
-                                    <tr productId="${producto.id}">
-                                        <td>${producto.id}</td>
-                                        <td><a href="#" class="product-item">${producto.nombre}</a></td>
-                                        <td><ul>${descripcion}</ul></td>
-                                        <td>
-                                            <button class="product-delete btn btn-danger">
-                                                Eliminar
-                                            </button>
-                                        </td>
-                                    </tr>
-                                `;
-
-                                template_bar += `<li>${producto.nombre}</li>`;
-                            });
-                            $('#product-result').show();
-                            $('#container').html(template_bar);
-                            $('#products').html(template);
-                        }
-                    }
-                }
-            });
-        } else {
-            $('#product-result').hide();
-        }
-    });
-
     $('#product-form').submit(e => {
         e.preventDefault();
-
         let postData = JSON.parse($('#description').val());
         postData['nombre'] = $('#name').val();
         postData['id'] = $('#productId').val();
-
         const url = edit === false ? './backend/product-add.php' : './backend/product-edit.php';
         
         $.post(url, postData, (response) => {
@@ -121,44 +70,25 @@ $(document).ready(function(){
             $('#container').html(template_bar);
             listarProductos();
             edit = false;
-
-            // Restaurar el texto del botón a "Agregar Producto"
             $('button.btn-primary').text("Agregar Producto");
         });
     });
 
-    $(document).on('click', '.product-delete', (e) => {
-        if (confirm('¿Realmente deseas eliminar el producto?')) {
-            const element = $(e.target).closest('tr');
-            const id = $(element).attr('productId');
-            $.post('./backend/product-delete.php', { id }, (response) => {
-                $('#product-result').hide();
-                listarProductos();
-            });
-        }
-    });
-
     $(document).on('click', '.product-item', (e) => {
-        const element = $(e.target).closest('tr');
+        const element = $(this)[0].activeElement.parentElement.parentElement;
         const id = $(element).attr('productId');
-        
-        $.post('./backend/product-single.php', { id }, (response) => {
+        $.post('./backend/product-single.php', {id}, (response) => {
             let product = JSON.parse(response);
             $('#name').val(product.nombre);
             $('#productId').val(product.id);
-            
-            delete product.nombre;
-            delete product.eliminado;
-            delete product.id;
-            
-            let JsonString = JSON.stringify(product, null, 2);
+            delete(product.nombre);
+            delete(product.eliminado);
+            delete(product.id);
+            let JsonString = JSON.stringify(product,null,2);
             $('#description').val(JsonString);
-            
-            // Cambia el texto del botón a "Modificar Producto"
-            $('button.btn-primary').text("Modificar Producto");
-            
             edit = true;
+            $('button.btn-primary').text("Modificar Producto");
         });
         e.preventDefault();
-    });
+    });    
 });
