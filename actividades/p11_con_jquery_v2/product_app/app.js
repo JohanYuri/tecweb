@@ -1,18 +1,8 @@
-// JSON BASE A MOSTRAR EN FORMULARIO
-var baseJSON = {
-    "precio": 0.0,
-    "unidades": 1,
-    "modelo": "XX-000",
-    "marca": "NA",
-    "detalles": "NA",
-    "imagen": "img/default.png"
-  };
+// App Modificar Producto
 
 $(document).ready(function(){
     let edit = false;
 
-    let JsonString = JSON.stringify(baseJSON,null,2);
-    $('#description').val(JsonString);
     $('#product-result').hide();
     listarProductos();
 
@@ -25,12 +15,13 @@ $(document).ready(function(){
                 if(Object.keys(productos).length > 0) {
                     let template = '';
                     productos.forEach(producto => {
-                        let descripcion = '';
-                        descripcion += '<li>precio: '+producto.precio+'</li>';
-                        descripcion += '<li>unidades: '+producto.unidades+'</li>';
-                        descripcion += '<li>modelo: '+producto.modelo+'</li>';
-                        descripcion += '<li>marca: '+producto.marca+'</li>';
-                        descripcion += '<li>detalles: '+producto.detalles+'</li>';
+                        let descripcion = `
+                            <li>precio: ${producto.precio}</li>
+                            <li>unidades: ${producto.unidades}</li>
+                            <li>modelo: ${producto.modelo}</li>
+                            <li>marca: ${producto.marca}</li>
+                            <li>detalles: ${producto.detalles}</li>
+                        `;
                         template += `
                             <tr productId="${producto.id}">
                                 <td>${producto.id}</td>
@@ -50,22 +41,54 @@ $(document).ready(function(){
         });
     }
 
+    // Validar campos al perder el foco
+    function validarCampo(campo) {
+        if ($(campo).val().trim() === "") {
+            $(campo).addClass("is-invalid");
+            return false;
+        } else {
+            $(campo).removeClass("is-invalid");
+            return true;
+        }
+    }
+
+    $('#name, #precio, #unidades, #modelo, #marca, #detalles, #imagen').blur(function() {
+        validarCampo(this);
+    });
+
     $('#product-form').submit(e => {
         e.preventDefault();
-        let postData = JSON.parse($('#description').val());
-        postData['nombre'] = $('#name').val();
-        postData['id'] = $('#productId').val();
-        const url = edit === false ? './backend/product-add.php' : './backend/product-edit.php';
-        
+
+        let valid = true;
+        $('#name, #precio, #unidades, #modelo, #marca, #detalles, #imagen').each(function() {
+            if (!validarCampo(this)) valid = false;
+        });
+
+        if (!valid) {
+            alert("Por favor, completa todos los campos antes de agregar el producto.");
+            return;
+        }
+
+        let postData = {
+            nombre: $('#name').val(),
+            id: $('#productId').val(),
+            precio: parseFloat($('#precio').val()),
+            unidades: parseInt($('#unidades').val()),
+            modelo: $('#modelo').val(),
+            marca: $('#marca').val(),
+            detalles: $('#detalles').val(),
+            imagen: $('#imagen').val()
+        };
+
+        const url = edit ? './backend/product-edit.php' : './backend/product-add.php';
+
         $.post(url, postData, (response) => {
             let respuesta = JSON.parse(response);
-            let template_bar = '';
-            template_bar += `
+            let template_bar = `
                 <li style="list-style: none;">status: ${respuesta.status}</li>
                 <li style="list-style: none;">message: ${respuesta.message}</li>
             `;
-            $('#name').val('');
-            $('#description').val(JsonString);
+            $('#product-form')[0].reset();
             $('#product-result').show();
             $('#container').html(template_bar);
             listarProductos();
@@ -81,11 +104,12 @@ $(document).ready(function(){
             let product = JSON.parse(response);
             $('#name').val(product.nombre);
             $('#productId').val(product.id);
-            delete(product.nombre);
-            delete(product.eliminado);
-            delete(product.id);
-            let JsonString = JSON.stringify(product,null,2);
-            $('#description').val(JsonString);
+            $('#precio').val(product.precio);
+            $('#unidades').val(product.unidades);
+            $('#modelo').val(product.modelo);
+            $('#marca').val(product.marca);
+            $('#detalles').val(product.detalles);
+            $('#imagen').val(product.imagen);
             edit = true;
             $('button.btn-primary').text("Modificar Producto");
         });
