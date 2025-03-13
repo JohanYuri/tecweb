@@ -32,20 +32,26 @@
               <!-- FORMULARIO PARA AGREGAR PRODUCTO -->
               <form id="product-form">
                 <div class="form-group">
-                  <input class="form-control" type="text" id="name" placeholder="Nombre de producto">
+                  <input class="form-control" type="text" id="name" placeholder="Nombre de producto" required>
                   <small id="name-status" class="text-danger"></small>
                 </div>
                 <div class="form-group">
-                  <input class="form-control" type="number" id="precio" placeholder="Precio">
+                  <input class="form-control" type="number" id="precio" placeholder="Precio" required>
                 </div>
                 <div class="form-group">
-                  <input class="form-control" type="number" id="unidades" placeholder="Unidades">
+                  <input class="form-control" type="number" id="unidades" placeholder="Unidades" required>
                 </div>
                 <div class="form-group">
                   <input class="form-control" type="text" id="modelo" placeholder="Modelo">
                 </div>
                 <div class="form-group">
-                  <input class="form-control" type="text" id="marca" placeholder="Marca">
+                  <select class="form-control" id="marca" required>
+                    <option value="" disabled selected>Selecciona una marca</option>
+                    <option value="Jordan">Jordan</option>
+                    <option value="Adidas">Adidas</option>
+                    <option value="Puma">Puma</option>
+                    <option value="Under Armor">Under Armor</option>
+                  </select>
                 </div>
                 <div class="form-group">
                   <textarea class="form-control" id="detalles" placeholder="Detalles"></textarea>
