@@ -1,8 +1,7 @@
 <?php
 namespace tecweb\Myapi;
 
-use tecweb\Myapi\DataBase as DataBase;
-require_once __DIR__ . '/DataBase.php';
+use tecweb\Myapi\DataBase;
 
 class Products extends DataBase {
     private $response = array();
@@ -15,34 +14,84 @@ class Products extends DataBase {
     public function list() {
         $this->response = array();
         $query = "SELECT * FROM productos WHERE eliminado = 0";
+        
         if ($result = $this->conexion->query($query)) {
-            $rows = $result->fetch_all(MYSQLI_ASSOC);
-            if (!empty($rows)) {
-                $this->response = $rows;
-            }
+            $this->response = $result->fetch_all(MYSQLI_ASSOC);
             $result->free();
         } else {
-            die('Query Error: ' . mysqli_error($this->conexion));
+            $this->response = ['status' => 'error', 'message' => $this->conexion->error];
         }
     }
 
     public function singleByName(string $name) {
         $this->response = array();
-        $escaped_name = $this->conexion->real_escape_string($name);
-        $query = "SELECT * FROM productos WHERE nombre = '$escaped_name' AND eliminado = 0 LIMIT 1";
-        if ($result = $this->conexion->query($query)) {
-            $row = $result->fetch_assoc();
-            if ($row) {
-                $this->response = array($row);
-            }
-            $result->free();
+        $stmt = $this->conexion->prepare("SELECT * FROM productos WHERE nombre = ? AND eliminado = 0 LIMIT 1");
+        $stmt->bind_param("s", $name);
+        
+        if ($stmt->execute()) {
+            $result = $stmt->get_result();
+            $this->response = $result->fetch_all(MYSQLI_ASSOC);
         } else {
-            die('Query Error: ' . mysqli_error($this->conexion));
+            $this->response = ['status' => 'error', 'message' => $stmt->error];
         }
+        $stmt->close();
     }
 
     public function getData() {
         return json_encode($this->response, JSON_PRETTY_PRINT);
     }
 
+    public function add(string $nombre, string $marca, string $modelo, ?float $precio, string $detalles, int $unidades, string $imagen) {
+        $this->response = array();
+        $stmt = $this->conexion->prepare("INSERT INTO productos (nombre, marca, modelo, precio, detalles, unidades, imagen, eliminado) VALUES (?, ?, ?, ?, ?, ?, ?, 0)");
+        $stmt->bind_param("sssdsss", $nombre, $marca, $modelo, $precio, $detalles, $unidades, $imagen);
+        
+        if ($stmt->execute()) {
+            $this->response = ['status' => 'success', 'message' => 'Producto agregado'];
+        } else {
+            $this->response = ['status' => 'error', 'message' => $stmt->error];
+        }
+        $stmt->close();
+    }
+
+    public function delete(int $id) {
+        $this->response = array();
+        $stmt = $this->conexion->prepare("UPDATE productos SET eliminado = 1 WHERE id = ?");
+        $stmt->bind_param("i", $id);
+        
+        if ($stmt->execute()) {
+            $this->response = ['status' => 'success', 'message' => 'Producto eliminado'];
+        } else {
+            $this->response = ['status' => 'error', 'message' => $stmt->error];
+        }
+        $stmt->close();
+    }
+
+    public function update(int $id, string $nombre, string $marca, string $modelo, ?float $precio, string $detalles, int $unidades, string $imagen) {
+        $this->response = array();
+        $stmt = $this->conexion->prepare("UPDATE productos SET nombre = ?, marca = ?, modelo = ?, precio = ?, detalles = ?, unidades = ?, imagen = ? WHERE id = ?");
+        $stmt->bind_param("sssdsssi", $nombre, $marca, $modelo, $precio, $detalles, $unidades, $imagen, $id);
+        
+        if ($stmt->execute()) {
+            $this->response = ['status' => 'success', 'message' => 'Producto actualizado'];
+        } else {
+            $this->response = ['status' => 'error', 'message' => $stmt->error];
+        }
+        $stmt->close();
+    }
+
+    public function findById(int $id) {
+        $this->response = array();
+        $stmt = $this->conexion->prepare("SELECT * FROM productos WHERE id = ? AND eliminado = 0 LIMIT 1");
+        $stmt->bind_param("i", $id);
+        
+        if ($stmt->execute()) {
+            $result = $stmt->get_result();
+            $this->response = $result->fetch_all(MYSQLI_ASSOC);
+        } else {
+            $this->response = ['status' => 'error', 'message' => $stmt->error];
+        }
+        $stmt->close();
+    }
 }
+?>
