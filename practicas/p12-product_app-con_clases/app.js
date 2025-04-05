@@ -119,6 +119,7 @@ $(document).ready(function(){
         }
     });
 
+
     $('#product-form').submit(e => {
         e.preventDefault();
 
@@ -132,31 +133,76 @@ $(document).ready(function(){
          * AQUÍ DEBES AGREGAR LAS VALIDACIONES DE LOS DATOS EN EL JSON
          * --> EN CASO DE NO HABER ERRORES, SE ENVIAR EL PRODUCTO A AGREGAR
          **/
+        let valid = true;
+        let errorMessage = "";
 
-        const url = edit === false ? './backend/product-add.php' : './backend/product-edit.php';
+        if (postData['nombre'].length > 100 || postData['nombre'].length == 0) {
+            valid = false;
+            errorMessage += "El nombre del producto no puede estar vacío o ser mayor a 100 caracteres\n";
+        }
+
+        if (!["Jordan", "Nike", "Rolex", "Puma"].includes(postData['marca'])) {
+            valid = false;
+            errorMessage += "La marca del producto no es válida\n";
+        }
+
+        if(postData['modelo'].length> 25 || postData['modelo'].match(/^[a-zA-Z0-9]+$/)){
+            valid = false;
+            errorMessage += "El modelo es requerido, debe ser alfanumérico y tener 25 caracteres o menos.\n";
+        }
+
+        if (isNaN(postData['precio']) || postData['precio'] <= 99.99) {
+            valid = false;
+            errorMessage += "El precio del producto no es válido (debe ser número y mayor a 99.99)\n";
+        }
+
+        if(postData['detalles'].length> 250){
+            valid = false;
+            errorMessage += "Los detalles del producto no pueden ser mayores a 250 caracteres\n";
+        }
+
+        if (isNaN(postData['unidades']) || postData['unidades'] <= 0) {
+            valid = false;
+            errorMessage += "Las unidades del producto no son válidas (debe ser número y mayor a 0)\n";
+        }
+
+        if(postData['imagen'].length > 50 || !postData['imagen'].startsWith('img/')){
+            valid = false;
+            errorMessage += "La URL de la imagen del producto no puede ser mayor a 50 caracteres y debe comenzar con 'img/'\n";
+        }
+        // Si es valido, se inserta el producto
+        if(!valid){
+            alert(errorMessage);
+            return;
+        }
+        else{
+            const url = edit === false ? './backend/product-add.php' : './backend/product-edit.php';
+            
+            $.post(url, postData, (response) => {
+                console.log(response);
+                // SE OBTIENE EL OBJETO DE DATOS A PARTIR DE UN STRING JSON
+                let respuesta = JSON.parse(response);
+                // SE CREA UNA PLANTILLA PARA CREAR INFORMACIÓN DE LA BARRA DE ESTADO
+                let template_bar = '';
+                template_bar += `
+                            <li style="list-style: none;">status: ${respuesta.status}</li>
+                            <li style="list-style: none;">message: ${respuesta.message}</li>
+                        `;
+                // SE REINICIA EL FORMULARIO
+                $('#name').val('');
+                $('#description').val(JsonString);
+                // SE HACE VISIBLE LA BARRA DE ESTADO
+                $('#product-result').show();
+                // SE INSERTA LA PLANTILLA PARA LA BARRA DE ESTADO
+                $('#container').html(template_bar);
+                // SE LISTAN TODOS LOS PRODUCTOS
+                listarProductos();
+                // SE REGRESA LA BANDERA DE EDICIÓN A false
+                edit = false;
+            });
+        }
+
         
-        $.post(url, postData, (response) => {
-            console.log(response);
-            // SE OBTIENE EL OBJETO DE DATOS A PARTIR DE UN STRING JSON
-            let respuesta = JSON.parse(response);
-            // SE CREA UNA PLANTILLA PARA CREAR INFORMACIÓN DE LA BARRA DE ESTADO
-            let template_bar = '';
-            template_bar += `
-                        <li style="list-style: none;">status: ${respuesta.status}</li>
-                        <li style="list-style: none;">message: ${respuesta.message}</li>
-                    `;
-            // SE REINICIA EL FORMULARIO
-            $('#name').val('');
-            $('#description').val(JsonString);
-            // SE HACE VISIBLE LA BARRA DE ESTADO
-            $('#product-result').show();
-            // SE INSERTA LA PLANTILLA PARA LA BARRA DE ESTADO
-            $('#container').html(template_bar);
-            // SE LISTAN TODOS LOS PRODUCTOS
-            listarProductos();
-            // SE REGRESA LA BANDERA DE EDICIÓN A false
-            edit = false;
-        });
     });
 
     $(document).on('click', '.product-delete', (e) => {
@@ -207,5 +253,5 @@ $(document).ready(function(){
             edit = true;
         });
         e.preventDefault();
-    });    
+    });    
 });

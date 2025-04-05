@@ -4,15 +4,8 @@ namespace TECWEB\MYAPI\Create;
 use TECWEB\MYAPI\DataBase;
 require_once __DIR__ . '/../DataBase.php';
 
-
-
 class ProductsCreate extends DataBase {
     private $data;
-
-    public function getData() {
-        // SE HACE LA CONVERSIÓN DE ARRAY A JSON
-        return json_encode($this->data, JSON_PRETTY_PRINT);
-    }
 
     public function __construct($db, $user='root', $pass='1234') {
         $this->data = array();
@@ -20,7 +13,6 @@ class ProductsCreate extends DataBase {
     }
 
     public function add($jsonOBJ) {
-        
         // SE OBTIENE LA INFORMACIÓN DEL PRODUCTO ENVIADA POR EL CLIENTE
         $this->data = array(
             'status'  => 'error',
@@ -47,4 +39,9 @@ class ProductsCreate extends DataBase {
             $this->conexion->close();
         }
     }
+    public function getData() {
+        // SE HACE LA CONVERSIÓN DE ARRAY A JSON
+        return json_encode($this->data, JSON_PRETTY_PRINT);
+    }
+
 }
