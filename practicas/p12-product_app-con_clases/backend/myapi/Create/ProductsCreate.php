@@ -1,10 +1,10 @@
 <?php
-namespace TECWEB\MYAPI;
+namespace TECWEB\MYAPI\Create;
 
 use TECWEB\MYAPI\DataBase;
 require_once __DIR__ . '/../DataBase.php';
 
-class Create extends DataBase {
+class ProductsCreate extends DataBase {
     private $data;
 
     public function __construct($db, $user='root', $pass='1234') {
@@ -13,11 +13,13 @@ class Create extends DataBase {
     }
 
     public function add($jsonOBJ) {
+        // SE OBTIENE LA INFORMACIÓN DEL PRODUCTO ENVIADA POR EL CLIENTE
         $this->data = array(
             'status'  => 'error',
             'message' => 'Ya existe un producto con ese nombre'
         );
         if(isset($jsonOBJ->nombre)) {
+            // SE ASUME QUE LOS DATOS YA FUERON VALIDADOS ANTES DE ENVIARSE
             $sql = "SELECT * FROM productos WHERE nombre = '{$jsonOBJ->nombre}' AND eliminado = 0";
             $result = $this->conexion->query($sql);
             
@@ -28,11 +30,12 @@ class Create extends DataBase {
                     $this->data['status'] =  "success";
                     $this->data['message'] =  "Producto agregado";
                 } else {
-                    $this->data['message'] = "ERROR: No se ejecutó $sql. " . mysqli_error($this->conexion);
+                    $this->data['message'] = "ERROR: No se ejecuto $sql. " . mysqli_error($this->conexion);
                 }
             }
 
             $result->free();
+            // Cierra la conexion
             $this->conexion->close();
         }
     }
