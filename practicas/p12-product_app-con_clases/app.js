@@ -166,6 +166,20 @@ $(document).ready(function(){
             $.post('./backend/product-delete.php', {id}, (response) => {
                 $('#product-result').hide();
                 listarProductos();
+
+                response = JSON.parse(response);
+                if(response.status == "success"){
+                    $('#container').html(`
+                                <li>Producto Eliminado</li>
+                            `);
+                    $('#product-result').show();
+                }
+                else{
+                    $('#container').html(`
+                                <li>No se pudo eliminar el producto</li>
+                            `);
+                    $('#product-result').show();
+                }
             });
         }
     });
@@ -193,5 +207,5 @@ $(document).ready(function(){
             edit = true;
         });
         e.preventDefault();
-    });    
+    });    
 });

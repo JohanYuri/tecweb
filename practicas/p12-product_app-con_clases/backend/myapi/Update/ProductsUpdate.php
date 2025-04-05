@@ -7,6 +7,11 @@ require_once __DIR__ . '/../DataBase.php';
 class ProductsUpdate extends DataBase {
     private $data;
 
+    public function getData() {
+        // SE HACE LA CONVERSIÓN DE ARRAY A JSON
+        return json_encode($this->data, JSON_PRETTY_PRINT);
+    }
+
     public function __construct($db, $user='root', $pass='1234') {
         $this->data = array();
         parent::__construct($db, $user, $pass);
