@@ -17,7 +17,7 @@
         $response->getBody()->write('Hola, ' . $args["nombre"]);
         return $response;
     })->setName('root');
-    
+
     $app->post('/pruebapost', function(Request $request, Response $response, $args){
         $reqPost = $request->getParsedBody();
         $val1 = $reqPost["val1"];
@@ -27,15 +27,19 @@
         return $response;
     });
 
-    $app->post('/testjson', function(Request $request, Response $response, $args){
+    $app->post('/testjson', function(Request $request, Response $response, $args) {
+        // Obtener datos del formulario
         $reqPost = $request->getParsedBody();
-        $data[0]['nombre']    = $reqPost["nombre1"];
-        $data[0]['apellidos'] = $reqPost["apellido1"];
-        $data[1]['nombre']    = $reqPost["nombre2"];
-        $data[1]['apellidos'] = $reqPost["apellido2"];
-
+        
+        // Crear JSON solo con los datos recibidos
+        $data = [
+            'nombre'    => $reqPost['nombre'] ?? 'No proporcionado',
+            'apellidos' => $reqPost['apellidos'] ?? 'No proporcionado',
+        ];
+    
+        // Devolver como JSON
         $response->getBody()->write(json_encode($data, JSON_PRETTY_PRINT));
-        return $response;
+        return $response->withHeader('Content-Type', 'application/json');
     });
     
     $app->run();
